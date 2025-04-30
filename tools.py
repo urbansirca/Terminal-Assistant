@@ -7,15 +7,14 @@ from langchain.tools import tool
 import subprocess
 import shlex
 import os
-from logger import log_tool_execution
 import requests
 from typing import Optional, Dict, Any
 import os
 
+
 # from ssh_utils import execute_command, client
 
 @tool
-@log_tool_execution
 def example_tool(arg_1: str):
     """
     Example tool that takes a string argument and returns it.
@@ -31,7 +30,6 @@ def example_tool(arg_1: str):
 
 
 @tool
-@log_tool_execution
 def execute_command(command: str) -> str:
     """
     Execute any shell command in the terminal. This is a universal tool that can run any terminal command,
