@@ -50,7 +50,7 @@ Remember to wrap heredoc in curly braces { } when chaining with && to ensure pro
 
     def __init__(self):
         self.llm = ChatOpenAI(
-            model="gpt-4",
+            model="gpt-4.1-mini",
             temperature=0,
             openai_api_key=os.getenv("OPENAI_API_KEY"),
         )
@@ -160,8 +160,15 @@ Remember to wrap heredoc in curly braces { } when chaining with && to ensure pro
                     self.history.append(AIMessage(content=payload))
 
                 elif action == "confirm":
+                    # interpret the command with an openAI model
+                    response = self.llm.invoke(
+                        input=[SystemMessage(content="Explain the shell command in one sentence or less"), HumanMessage(content=payload)]
+                    )
+                    explanation = response.content
+                    print_agent(f"Command explanation: {explanation}")
+
                     confirm = prompt_user(
-                        f"⚠️  Command looks risky: {payload}\nProceed? (yes/no) "
+                        f"⚠️  Command looks risky: {payload}\nExplanation: {explanation}\nProceed? (yes/no) "
                     )
                     if confirm.strip().lower() == "yes":
                         # 1) Log the impending tool call
