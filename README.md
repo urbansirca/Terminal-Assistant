@@ -35,5 +35,5 @@ ShellAgent is a Python-based REPL tool that lets you interact with your macOS (o
 
 1. **Clone the repo**  
    ```bash
-   git clone https://github.com/yourusername/shellagent.git
-   cd shellagent
+   git clone https://github.com/urbansirca/Terminal-Assistant.git
+   cd Terminal-Assistant
